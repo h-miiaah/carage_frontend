@@ -59,7 +59,7 @@ function postFetch(name, year, color, mileage, image_url, brand_id) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(bodyData),
   })
-    .then((response) => respone.json())
+    .then((response) => response.json())
     .then((car) => {
       const carData = car.data.attributes;
       const carMarkup = `
