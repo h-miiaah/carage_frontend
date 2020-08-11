@@ -18,6 +18,7 @@ function getCars() {
                 <li>Mileage: ${car.attributes.mileage} miles</li>
             </ul>
             <img src=${car.attributes.image_url} height="300" width="500">
+            <br>
             <button data-id=${car.id}>Edit</button>
             </div>
             <br>
