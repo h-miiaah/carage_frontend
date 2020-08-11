@@ -55,5 +55,6 @@ function postFetch(name, year, color, mileage, image_url, brand_id) {
       document.querySelector(
         "#car-container"
       ).innerHTML += newCar.renderCarCard();
+      document.querySelector("#create-car-form").reset();
     });
 }
