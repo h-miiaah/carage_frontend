@@ -13,29 +13,13 @@ function getCars() {
     .then((response) => response.json())
     .then((cars) => {
       cars.data.forEach((car) => {
-        render(car);
+        let newCar = new Car(car, car.attributes);
+
+        document.querySelector(
+          "#car-container"
+        ).innerHTML += newCar.renderCarCard();
       });
     });
-}
-
-function render(car) {
-  const carMarkup = `
-    <div data-id=${car.id}>
-    <h2>${car.attributes.name}</h2>
-    <ul>
-        <li>Year: ${car.attributes.year}</li>
-        <li>Color: ${car.attributes.color}</li>
-        <li>Mileage: ${car.attributes.mileage} miles</li>
-    </ul>
-    <img src=${car.attributes.image_url} height="300" width="500">
-    <br>
-    <button data-id=${car.id}>Edit</button>
-    </div>
-    <br>
-    <br>
-  `;
-
-  document.querySelector("#car-container").innerHTML += carMarkup;
 }
 
 function createFormHandler(e) {
@@ -66,6 +50,10 @@ function postFetch(name, year, color, mileage, image_url, brand_id) {
     .then((response) => response.json())
     .then((car) => {
       const carData = car.data;
-      render(carData);
+      let newCar = new Car(carData, carData.attributes);
+
+      document.querySelector(
+        "#car-container"
+      ).innerHTML += newCar.renderCarCard();
     });
 }
