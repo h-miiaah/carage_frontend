@@ -13,25 +13,29 @@ function getCars() {
     .then((response) => response.json())
     .then((cars) => {
       cars.data.forEach((car) => {
-        const carMarkup = `
-            <div data-id=${car.id}>
-            <h2>${car.attributes.name}</h2>
-            <ul>
-                <li>Year: ${car.attributes.year}</li>
-                <li>Color: ${car.attributes.color}</li>
-                <li>Mileage: ${car.attributes.mileage} miles</li>
-            </ul>
-            <img src=${car.attributes.image_url} height="300" width="500">
-            <br>
-            <button data-id=${car.id}>Edit</button>
-            </div>
-            <br>
-            <br>
-          `;
-
-        document.querySelector("#car-container").innerHTML += carMarkup;
+        render(car);
       });
     });
+}
+
+function render(car) {
+  const carMarkup = `
+    <div data-id=${car.id}>
+    <h2>${car.attributes.name}</h2>
+    <ul>
+        <li>Year: ${car.attributes.year}</li>
+        <li>Color: ${car.attributes.color}</li>
+        <li>Mileage: ${car.attributes.mileage} miles</li>
+    </ul>
+    <img src=${car.attributes.image_url} height="300" width="500">
+    <br>
+    <button data-id=${car.id}>Edit</button>
+    </div>
+    <br>
+    <br>
+  `;
+
+  document.querySelector("#car-container").innerHTML += carMarkup;
 }
 
 function createFormHandler(e) {
@@ -61,23 +65,7 @@ function postFetch(name, year, color, mileage, image_url, brand_id) {
   })
     .then((response) => response.json())
     .then((car) => {
-      const carData = car.data.attributes;
-      const carMarkup = `
-            <div data-id=${car.id}>
-            <h2>${carData.name}</h2>
-            <ul>
-                <li>Year: ${carData.year}</li>
-                <li>Color: ${carData.color}</li>
-                <li>Mileage: ${carData.mileage} miles</li>
-            </ul>
-            <img src=${carData.image_url} height="300" width="500">
-            <br>
-            <button data-id=${carData.id}>Edit</button>
-            </div>
-            <br>
-            <br>
-          `;
-
-      document.querySelector("#car-container").innerHTML += carMarkup;
+      const carData = car.data;
+      render(carData);
     });
 }
